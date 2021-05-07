@@ -8,4 +8,13 @@ export class CreateTaskDto {
 
     @IsNotEmpty()
     description: string;
+
+    @IsNotEmpty()
+    media: string;
+
+    @IsNotEmpty()
+    target_date: string;
+
+    @IsNotEmpty()
+    status: string;
 }

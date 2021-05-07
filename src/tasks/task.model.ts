@@ -1,8 +1,20 @@
-export interface Task {
-    id: string;
-    title: string;
-    description: string;
-    status: TaskStatus;
+import * as mongoose from 'mongoose';
+
+export const TaskSchema = new mongoose.Schema({
+  title: { type: String, required: true },
+  description: { type: String, required: true },
+  media: { type: String, required: true },
+  target_date: { type: String, required: true },
+  status: { type: String, required: true },
+});
+
+export interface Task extends mongoose.Document {
+  id: string;
+  title: string;
+  description: string;
+  media: string;
+  target_date: string;
+  status: TaskStatus;
 }
 
 export enum TaskStatus {
@@ -10,4 +22,3 @@ export enum TaskStatus {
     IN_PROGRESS = 'IN_PROGRESS',
     DONE = 'DONE'
 }
-
