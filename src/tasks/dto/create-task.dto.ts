@@ -9,7 +9,6 @@ export class CreateTaskDto {
     @IsNotEmpty()
     description: string;
 
-    @IsNotEmpty()
     media: string;
 
     @IsNotEmpty()

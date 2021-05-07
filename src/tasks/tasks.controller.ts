@@ -14,24 +14,20 @@ export class TasksController {
 
     @Post()
     @UsePipes(ValidationPipe)
-    async createTask(@Body() createTaskDto: CreateTaskDto): Promise<any> {
-        return this.tasksService.createTask(createTaskDto);
-    }
-
-    @Post('upload')
     @UseInterceptors(FileInterceptor('media',
-      {
-        storage: diskStorage({
-          destination: './uploads', 
-          filename: (req, file, cb) => {
-          const randomName = Array(32).fill(null).map(() => (Math.round(Math.random() * 16)).toString(16)).join('')
-          return cb(null, `${randomName}${extname(file.originalname)}`)
-        }
-        })
-      }
+            {
+                storage: diskStorage({
+                destination: './uploads', 
+                filename: (req, file, cb) => {
+                const randomName = Array(32).fill(null).map(() => (Math.round(Math.random() * 16)).toString(16)).join('')
+                return cb(null, `${randomName}${extname(file.originalname)}`)
+                }
+                })
+            }
+        )
     )
-    )
-    uploadFile(@UploadedFile() media: Express.Multer.File, @Body() createTaskDto: CreateTaskDto) {
-    console.log(media, createTaskDto);
+    createTask(@UploadedFile() media: Express.Multer.File, @Body() createTaskDto: CreateTaskDto) {
+        createTaskDto.media = `${media.destination}/${media.filename}`
+        return this.tasksService.createTask(createTaskDto);
     }
 }
