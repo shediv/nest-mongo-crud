@@ -9,6 +9,10 @@ import { TasksService } from './tasks.service';
 // Mock TasksService
 const mockTasksService = () => ({
     createTask: jest.fn(),
+    getTaskById: jest.fn(),
+    getAllTasks: jest.fn(), 
+    getTasksWithFilters: jest.fn(),
+    deleteTaskById: jest.fn(),   
 });
 
 describe('TasksController', () => {
@@ -87,6 +91,42 @@ describe('TasksController', () => {
             await taskController.createTask(media, mTaskData);
             expect(taskService.createTask).toHaveBeenCalled();
             expect(taskService.createTask).toBeCalledTimes(1);
+        });
+    });
+
+    describe('Test Get a task details by Id', () => {
+        it('should getTaskById method of TasksController', async () => {
+            const mTaskId = '609670a9e7799fb0704d974b';
+            await taskController.getTaskById(mTaskId);
+            expect(taskService.getTaskById).toHaveBeenCalled();
+            expect(taskService.getTaskById).toBeCalledTimes(1);
+        });
+    });
+
+    describe('Test Get all task', () => {
+        it('should call getTasks method of TasksController', async () => {
+            let mFilterDto;
+            await taskController.getTasks(mFilterDto);
+            expect(taskService.getAllTasks).toHaveBeenCalled();
+            expect(taskService.getAllTasks).toBeCalledTimes(1);
+        });
+    });
+
+    describe('Test Search task', () => {
+        it('should call getTasks method of TasksController', async () => {
+            let mFilterDto = { search: 'one', start: '0', limit: '5', sortBy: '1' };
+            await taskController.getTasks(mFilterDto);
+            expect(taskService.getTasksWithFilters).toHaveBeenCalled();
+            expect(taskService.getTasksWithFilters).toBeCalledTimes(1);
+        });
+    });
+
+    describe('Test Delete a task', () => {
+        it('should call deleteTaskById method of TasksController', async () => {
+            const mTaskId = '609670a9e7799fb0704d974b';
+            await taskController.deleteTaskById(mTaskId);
+            expect(taskService.deleteTaskById).toHaveBeenCalled();
+            expect(taskService.deleteTaskById).toBeCalledTimes(1);
         });
     });
 

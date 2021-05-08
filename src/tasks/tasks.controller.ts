@@ -46,7 +46,7 @@ export class TasksController {
     async getTasks(
         @Query(ValidationPipe) filterDto: GetTaskFilterDto
     ) {
-        if(Object.keys(filterDto).length) {
+        if(filterDto && Object.keys(filterDto).length) {
             const tasks = await this.tasksService.getTasksWithFilters(filterDto);
             return tasks;
         } else {
