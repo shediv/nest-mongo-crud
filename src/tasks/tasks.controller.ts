@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post, Query, UsePipes, ValidationPipe, UseInterceptors, UploadedFile } from '@nestjs/common';
+import { BadRequestException, Body, Controller, Delete, Get, Param, Patch, Post, Query, UsePipes, ValidationPipe, UseInterceptors, UploadedFile } from '@nestjs/common';
 import { FileInterceptor, FilesInterceptor } from "@nestjs/platform-express";
 import { diskStorage } from  'multer';
 import { extname } from  'path';
@@ -7,6 +7,7 @@ import { Task, TaskStatus } from './task.model';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { TaskStatusValidationPipe } from './pipes/task-status-validation.pipe';
 import { GetTaskFilterDto } from './dto/get-tasks-filter.dto';
+import { ErrorConstants } from '../constants/error.constant';
 
 @Controller('tasks')
 export class TasksController {
@@ -27,6 +28,9 @@ export class TasksController {
         )
     )
     createTask(@UploadedFile() media: Express.Multer.File, @Body() createTaskDto: CreateTaskDto) {
+        if (!media || Object.keys(createTaskDto).length != 4) {
+            throw new BadRequestException(ErrorConstants.CREATE_REQ_FIELD_ERROR);
+        }
         createTaskDto.media = `${media.destination}/${media.filename}`
         return this.tasksService.createTask(createTaskDto);
     }
