@@ -3,7 +3,7 @@ import { TaskStatus } from '../task.model';
 
 export class TaskStatusValidationPipe implements PipeTransform {
   readonly allowedStatuses = [
-    TaskStatus.OPEN,
+    TaskStatus.TODO,
     TaskStatus.IN_PROGRESS,
     TaskStatus.DONE,
   ];

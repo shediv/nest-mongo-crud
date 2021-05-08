@@ -18,7 +18,7 @@ export interface Task extends mongoose.Document {
 }
 
 export enum TaskStatus {
-    OPEN = 'OPEN',
-    IN_PROGRESS = 'IN_PROGRESS',
+    TODO = 'Todo',
+    IN_PROGRESS = 'In-progress',
     DONE = 'DONE'
 }

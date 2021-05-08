@@ -1,4 +1,5 @@
-import { IsNotEmpty } from 'class-validator';
+import { IsNotEmpty, IsEnum } from 'class-validator';
+import { TaskStatus } from '../task.model';
 
 export class CreateTaskDto {
     @IsNotEmpty()
@@ -11,5 +12,6 @@ export class CreateTaskDto {
     target_date: string;
 
     @IsNotEmpty()
+    @IsEnum(TaskStatus)
     status: string;
 }
