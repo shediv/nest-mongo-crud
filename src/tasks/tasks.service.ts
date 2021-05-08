@@ -60,4 +60,12 @@ export class TasksService {
         }
         return task;
     }
+
+    async deleteTaskById(id: string): Promise<any> {
+        const result = await this.taskModel.deleteOne({_id: id}).exec();
+        if (result.n === 0) {
+            throw new NotFoundException('Could not find task with given Id.');
+        }
+        return result;
+    }
 }

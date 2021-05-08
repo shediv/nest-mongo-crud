@@ -59,4 +59,9 @@ export class TasksController {
     getTaskById(@Param('id') id:string) {
         return this.tasksService.getTaskById(id);
     }
+
+    @Delete('/:id')
+    deleteTaskById(@Param('id') id:string) {
+        return this.tasksService.deleteTaskById(id);
+    }
 }
