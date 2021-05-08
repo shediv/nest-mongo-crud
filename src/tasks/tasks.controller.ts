@@ -31,7 +31,14 @@ export class TasksController {
         if (!media || Object.keys(createTaskDto).length != 4) {
             throw new BadRequestException(ErrorConstants.CREATE_REQ_FIELD_ERROR);
         }
-        createTaskDto.media = `${media.destination}/${media.filename}`
-        return this.tasksService.createTask(createTaskDto);
+        let taskdata = {
+            title: createTaskDto.title,
+            description: createTaskDto.description,
+            target_date: createTaskDto.target_date,
+            status: createTaskDto.status,
+            media: `${media.destination}/${media.filename}`
+        };
+        taskdata.media = `${media.destination}/${media.filename}`
+        return this.tasksService.createTask(taskdata);
     }
 }
