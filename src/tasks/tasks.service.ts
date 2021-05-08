@@ -2,7 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 
-import { Task, TaskStatus } from './task.model';
+import { Task } from './task.model';
 import { GetTaskFilterDto } from './dto/get-tasks-filter.dto';
 
 @Injectable()
@@ -26,6 +26,7 @@ export class TasksService {
     }
 
     async getTaskById(id: string): Promise<Task> {
+        // Check if Task by ID already exist
         const task = await this.findTask(id);
         return task;
     }
@@ -51,7 +52,7 @@ export class TasksService {
     private async findTask(id: string): Promise<Task> {
         let task;
         try {
-            task = await this.taskModel.find({_id: id, isActive: true }).exec();
+            task = await this.taskModel.findOne({_id: id, isActive: true }).exec();
         } catch (error) {
           throw new NotFoundException('Could not find task.');
         }
@@ -66,6 +67,20 @@ export class TasksService {
         if (result.n === 0) {
             throw new NotFoundException('Could not find task with given Id.');
         }
+        return result;
+    }
+
+    async updateTask(updateTaskDto: any): Promise<Task> {
+        // Check if Task by ID already exist
+        const taskUpdateData = await this.findTask(updateTaskDto.id);
+
+        // Update task values
+        if(updateTaskDto.title) taskUpdateData.title = updateTaskDto.title;
+        if(updateTaskDto.description) taskUpdateData.description = updateTaskDto.description;
+        if(updateTaskDto.target_date) taskUpdateData.target_date = updateTaskDto.target_date;
+        if(updateTaskDto.status) taskUpdateData.status = updateTaskDto.status;
+
+        const result = await taskUpdateData.save();
         return result;
     }
 }

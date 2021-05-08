@@ -5,6 +5,7 @@ import { extname } from  'path';
 import { TasksService } from './tasks.service';
 import { Task, TaskStatus } from './task.model';
 import { CreateTaskDto } from './dto/create-task.dto';
+import { UpdateTaskDto } from './dto/update-task.dto';
 import { TaskStatusValidationPipe } from './pipes/task-status-validation.pipe';
 import { GetTaskFilterDto } from './dto/get-tasks-filter.dto';
 import { ErrorConstants } from '../constants/error.constant';
@@ -58,6 +59,34 @@ export class TasksController {
     @Get('/:id')
     getTaskById(@Param('id') id:string) {
         return this.tasksService.getTaskById(id);
+    }
+
+    @Patch('/:id')
+    @UsePipes(ValidationPipe)
+    @UseInterceptors(FileInterceptor('media',
+            {
+                storage: diskStorage({
+                destination: './uploads', 
+                filename: (req, file, cb) => {
+                const randomName = Array(32).fill(null).map(() => (Math.round(Math.random() * 16)).toString(16)).join('')
+                return cb(null, `${randomName}${extname(file.originalname)}`)
+                }
+                })
+            }
+        )
+    )
+    updateTask(@UploadedFile() media: Express.Multer.File, @Param('id') taskId: string, @Body() updateTaskDto: UpdateTaskDto) {
+        let taskUpdatedata: any = updateTaskDto;
+        if (taskId) {
+            taskUpdatedata.id = taskId;
+
+            // if media is present then add media
+            if(media) taskUpdatedata.media = `${media.destination}/${media.filename}`;
+            return this.tasksService.updateTask(taskUpdatedata);
+
+        } else {
+            throw new BadRequestException(ErrorConstants.UPDATE_TASK_ID_REQ);
+        }
     }
 
     @Delete('/:id')
