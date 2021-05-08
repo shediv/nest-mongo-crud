@@ -1,0 +1,240 @@
+{
+	"info": {
+		"_postman_id": "91083143-407b-4c55-a2fd-d30b5a298263",
+		"name": "nest-crud-mongo",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Add tasks",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "title",
+							"value": "make lunch",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": "make one lunch for all",
+							"type": "text"
+						},
+						{
+							"key": "target_date",
+							"value": "2020-05-27",
+							"type": "text"
+						},
+						{
+							"key": "status",
+							"value": "Todo",
+							"type": "text"
+						},
+						{
+							"key": "media",
+							"type": "file",
+							"src": "/C:/Users/VideshHegde/Pictures/amplitudeData.PNG"
+						}
+					],
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/tasks",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"tasks"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get a  task by ID",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [],
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/tasks/609670a9e7799fb0704d974b",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"tasks",
+						"609670a9e7799fb0704d974b"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all tasks",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [],
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/tasks?search=one&&start=0&&limit=2&&sortBy=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"tasks"
+					],
+					"query": [
+						{
+							"key": "search",
+							"value": "one"
+						},
+						{
+							"key": null,
+							"value": null
+						},
+						{
+							"key": "start",
+							"value": "0"
+						},
+						{
+							"key": null,
+							"value": null
+						},
+						{
+							"key": "limit",
+							"value": "2"
+						},
+						{
+							"key": null,
+							"value": null
+						},
+						{
+							"key": "sortBy",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete a  task by ID",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [],
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/tasks/60966bf274316f0cf47a83a6",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"tasks",
+						"60966bf274316f0cf47a83a6"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update tasks details",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "title",
+							"value": "im coding now",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": "it's saturday and m coding",
+							"type": "text"
+						},
+						{
+							"key": "target_date",
+							"value": "2020-05-27",
+							"type": "text"
+						},
+						{
+							"key": "status",
+							"value": "In-progress",
+							"type": "text"
+						},
+						{
+							"key": "media",
+							"type": "file",
+							"src": "/C:/Users/VideshHegde/Pictures/Capture1.PNG"
+						}
+					],
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/tasks/609670a9e7799fb0704d974b",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"tasks",
+						"609670a9e7799fb0704d974b"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
