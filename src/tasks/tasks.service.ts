@@ -18,7 +18,8 @@ export class TasksService {
             description,
             media,
             target_date: new Date(target_date),
-            status
+            status,
+            isActive: true
           });
           const result = await newTask.save();
           return result;
@@ -30,7 +31,7 @@ export class TasksService {
     }
 
     async getAllTasks() {
-        const tasks = await this.taskModel.find().exec();
+        const tasks = await this.taskModel.find({ isActive: true }).exec();
         return tasks;
     }
 
@@ -38,7 +39,7 @@ export class TasksService {
         const { search, start, limit, sortBy } = filterDto;
         const tasks = await this.taskModel.aggregate(
                         [
-                            { $match: { $text: { $search: search || '' } } },
+                            { $match: { $text: { $search: search || '' }, isActive: true } },
                             { $skip: parseInt(start) || 0 },
                             { $limit: parseInt(limit) || 20 },
                             { $sort : { target_date : parseInt(sortBy) || 1 } }
@@ -50,11 +51,11 @@ export class TasksService {
     private async findTask(id: string): Promise<Task> {
         let task;
         try {
-            task = await this.taskModel.findById(id).exec();
+            task = await this.taskModel.find({_id: id, isActive: true }).exec();
         } catch (error) {
           throw new NotFoundException('Could not find task.');
         }
-        if (!task) {
+        if (!task || task.length < 1) {
           throw new NotFoundException('Could not find task.');
         }
         return task;

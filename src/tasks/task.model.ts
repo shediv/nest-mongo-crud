@@ -6,6 +6,7 @@ export const TaskSchema = new mongoose.Schema({
   media: { type: String, required: true },
   target_date: { type: Date, required: true },
   status: { type: String, required: true },
+  isActive: { type: Boolean, required: true }
 });
 
 export interface Task extends mongoose.Document {
@@ -15,6 +16,7 @@ export interface Task extends mongoose.Document {
   media: string;
   target_date: string;
   status: TaskStatus;
+  isActive: boolean
 }
 
 export enum TaskStatus {
