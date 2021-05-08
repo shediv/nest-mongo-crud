@@ -4,13 +4,12 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TasksModule } from './tasks/tasks.module';
+import { AppConst } from './constants/app.constant'
 
 @Module({
   imports: [
     TasksModule,
-    MongooseModule.forRoot(
-      'mongodb+srv://admin:adm1n@cluster0.1dx6c.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',
-    ),
+    MongooseModule.forRoot(AppConst.DB_CON_URL),
   ],
   controllers: [AppController],
   providers: [AppService],

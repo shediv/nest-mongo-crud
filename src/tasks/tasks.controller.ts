@@ -41,4 +41,22 @@ export class TasksController {
         taskdata.media = `${media.destination}/${media.filename}`
         return this.tasksService.createTask(taskdata);
     }
+
+    @Get()
+    async getTasks(
+        @Query(ValidationPipe) filterDto: GetTaskFilterDto
+    ) {
+        if(Object.keys(filterDto).length) {
+            const tasks = await this.tasksService.getTasksWithFilters(filterDto);
+            return tasks;
+        } else {
+            const tasks = await this.tasksService.getAllTasks();
+            return tasks;
+        }       
+    }
+
+    @Get('/:id')
+    getTaskById(@Param('id') id:string) {
+        return this.tasksService.getTaskById(id);
+    }
 }

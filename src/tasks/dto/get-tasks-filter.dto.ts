@@ -3,10 +3,18 @@ import { IsOptional, IsIn, IsNotEmpty } from 'class-validator';
 
 export class GetTaskFilterDto {
     @IsOptional()
-    @IsIn([TaskStatus.TODO, TaskStatus.IN_PROGRESS, TaskStatus.DONE])
-    status: TaskStatus;
+    @IsNotEmpty()
+    search: string;
 
     @IsOptional()
     @IsNotEmpty()
-    search: string;
+    start: string;
+
+    @IsOptional()
+    @IsNotEmpty()
+    limit: string;
+
+    @IsOptional()
+    @IsNotEmpty()
+    sortBy: string;
 }

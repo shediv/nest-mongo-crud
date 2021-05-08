@@ -3,7 +3,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 
 import { Task, TaskStatus } from './task.model';
-// import { GetTaskFilterDto } from './dto/get-tasks-filter.dto';
+import { GetTaskFilterDto } from './dto/get-tasks-filter.dto';
 
 @Injectable()
 export class TasksService {
@@ -22,5 +22,41 @@ export class TasksService {
           });
           const result = await newTask.save();
           return result;
+    }
+
+    async getTaskById(id: string): Promise<Task> {
+        const task = await this.findTask(id);
+        return task;
+    }
+
+    async getAllTasks() {
+        const tasks = await this.taskModel.find().exec();
+        return tasks;
+    }
+
+    async getTasksWithFilters(filterDto: GetTaskFilterDto): Promise<Task[]> {
+        const { search, start, limit, sortBy } = filterDto;
+        const tasks = await this.taskModel.aggregate(
+                        [
+                            { $match: { $text: { $search: search || '' } } },
+                            { $skip: parseInt(start) || 0 },
+                            { $limit: parseInt(limit) || 20 },
+                            { $sort : { target_date : parseInt(sortBy) || 1 } }
+                        ]
+                    ).exec();
+        return tasks;
+    }
+
+    private async findTask(id: string): Promise<Task> {
+        let task;
+        try {
+            task = await this.taskModel.findById(id).exec();
+        } catch (error) {
+          throw new NotFoundException('Could not find task.');
+        }
+        if (!task) {
+          throw new NotFoundException('Could not find task.');
+        }
+        return task;
     }
 }
