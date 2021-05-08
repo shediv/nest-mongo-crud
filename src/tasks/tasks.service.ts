@@ -4,6 +4,7 @@ import { Model } from 'mongoose';
 
 import { Task } from './task.model';
 import { GetTaskFilterDto } from './dto/get-tasks-filter.dto';
+import { ErrorConstants } from '../constants/error.constant';
 
 @Injectable()
 export class TasksService {
@@ -32,7 +33,7 @@ export class TasksService {
     }
 
     async getAllTasks() {
-        const tasks = await this.taskModel.find({ isActive: true }).exec();
+        const tasks = await this.taskModel.find({ }).exec();
         return tasks;
     }
 
@@ -40,7 +41,7 @@ export class TasksService {
         const { search, start, limit, sortBy } = filterDto;
         const tasks = await this.taskModel.aggregate(
                         [
-                            { $match: { $text: { $search: search || '' }, isActive: true } },
+                            { $match: { $text: { $search: search || '' } } },
                             { $skip: parseInt(start) || 0 },
                             { $limit: parseInt(limit) || 20 },
                             { $sort : { target_date : parseInt(sortBy) || 1 } }
@@ -52,12 +53,12 @@ export class TasksService {
     private async findTask(id: string): Promise<Task> {
         let task;
         try {
-            task = await this.taskModel.findOne({_id: id, isActive: true }).exec();
+            task = await this.taskModel.findOne({_id: id }).exec();
         } catch (error) {
-          throw new NotFoundException('Could not find task.');
+          throw new NotFoundException(ErrorConstants.NO_TASK_FOUND);
         }
         if (!task || task.length < 1) {
-          throw new NotFoundException('Could not find task.');
+          throw new NotFoundException(ErrorConstants.NO_TASK_FOUND);
         }
         return task;
     }
@@ -65,7 +66,7 @@ export class TasksService {
     async deleteTaskById(id: string): Promise<any> {
         const result = await this.taskModel.deleteOne({_id: id}).exec();
         if (result.n === 0) {
-            throw new NotFoundException('Could not find task with given Id.');
+            throw new NotFoundException(ErrorConstants.NO_TASK_FOUND);
         }
         return result;
     }
