@@ -1,35 +1,77 @@
-## Description
-
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## Crud App in NestJS and MongoDB
 
 ## Installation
 
 ```bash
-$ npm install
+$ yarn install
 ```
 
 ## Running the app
 
 ```bash
 # development
-$ npm run start
+$ yarn run start
 
 # watch mode
-$ npm run start:dev
+$ yarn run start:dev
 
 # production mode
-$ npm run start:prod
+$ yarn run start:prod
 ```
 
 ## Test
 
 ```bash
 # unit tests
-$ npm run test
+$ yarn run test
 
 # e2e tests
-$ npm run test:e2e
+$ yarn run test:e2e
 
 # test coverage
-$ npm run test:cov
+$ yarn run test:cov
 ```
+
+
+
+### APIS
+1. Add task
+    - https://nest-mongo-crud.herokuapp.com/tasks
+    - Type: POST
+    
+    User can create a task with the following details
+        ○ title
+        ○ description
+        ○ media (Image or Video anyone in a task)
+        ○ target_date
+        ○ status (Todo, In-progress, Done)
+
+2. User can see the task details
+    - https://nest-mongo-crud.herokuapp.com/tasks/{taskId}
+    - Type: GET
+
+3. Search/Get all tasks
+    - https://nest-mongo-crud.herokuapp.com/tasks?search=wake&&start=0&&limit=20&&sortBy=1
+    - Type: GET
+
+    User should be able to see the list of Task already created
+        - Default 20 tasks else pagination can be done using `start` and `limit`
+        - Users can search the task with the `title` and `description`.
+        - User can sort the task based on the `target_date` default is ascending
+
+4. User can update the task details from the detail screen
+    - https://nest-mongo-crud.herokuapp.com/tasks/{taskId}
+    - Type: PATCH
+
+    User can update task with the following details
+        ○ title
+        ○ description
+        ○ media (Image or Video anyone in a task)
+        ○ target_date
+        ○ status (Todo, In-progress, Done)
+
+5. Users can remove any task from the available tasks and allowed to remove multiple tasks at a time.
+    - https://nest-mongo-crud.herokuapp.com/tasks/{taskId}
+    - Type: DELETE        
+
+        

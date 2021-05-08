@@ -15,12 +15,12 @@
 					"formdata": [
 						{
 							"key": "title",
-							"value": "make lunch",
+							"value": "wake me",
 							"type": "text"
 						},
 						{
 							"key": "description",
-							"value": "make one lunch for all",
+							"value": "wake me up when september ends",
 							"type": "text"
 						},
 						{
@@ -46,12 +46,13 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/tasks",
-					"protocol": "http",
+					"raw": "https://nest-mongo-crud.herokuapp.com/tasks",
+					"protocol": "https",
 					"host": [
-						"localhost"
+						"nest-mongo-crud",
+						"herokuapp",
+						"com"
 					],
-					"port": "3000",
 					"path": [
 						"tasks"
 					]
@@ -60,7 +61,7 @@
 			"response": []
 		},
 		{
-			"name": "Get a  task by ID",
+			"name": "Get a  task details by ID",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -77,22 +78,23 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/tasks/609670a9e7799fb0704d974b",
-					"protocol": "http",
+					"raw": "https://nest-mongo-crud.herokuapp.com/tasks/6096da325a29c7001f594622",
+					"protocol": "https",
 					"host": [
-						"localhost"
+						"nest-mongo-crud",
+						"herokuapp",
+						"com"
 					],
-					"port": "3000",
 					"path": [
 						"tasks",
-						"609670a9e7799fb0704d974b"
+						"6096da325a29c7001f594622"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "Get all tasks",
+			"name": "Search/Get all tasks",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -109,19 +111,20 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/tasks?search=one&&start=0&&limit=2&&sortBy=1",
-					"protocol": "http",
+					"raw": "https://nest-mongo-crud.herokuapp.com/tasks?search=wake&&start=0&&limit=2&&sortBy=1",
+					"protocol": "https",
 					"host": [
-						"localhost"
+						"nest-mongo-crud",
+						"herokuapp",
+						"com"
 					],
-					"port": "3000",
 					"path": [
 						"tasks"
 					],
 					"query": [
 						{
 							"key": "search",
-							"value": "one"
+							"value": "wake"
 						},
 						{
 							"key": null,
@@ -167,15 +170,16 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/tasks/60966bf274316f0cf47a83a6",
-					"protocol": "http",
+					"raw": "https://nest-mongo-crud.herokuapp.com/tasks/609670a9e7799fb0704d974b",
+					"protocol": "https",
 					"host": [
-						"localhost"
+						"nest-mongo-crud",
+						"herokuapp",
+						"com"
 					],
-					"port": "3000",
 					"path": [
 						"tasks",
-						"60966bf274316f0cf47a83a6"
+						"609670a9e7799fb0704d974b"
 					]
 				}
 			},
@@ -222,12 +226,13 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/tasks/609670a9e7799fb0704d974b",
-					"protocol": "http",
+					"raw": "https://nest-mongo-crud.herokuapp.com/tasks/609670a9e7799fb0704d974b",
+					"protocol": "https",
 					"host": [
-						"localhost"
+						"nest-mongo-crud",
+						"herokuapp",
+						"com"
 					],
-					"port": "3000",
 					"path": [
 						"tasks",
 						"609670a9e7799fb0704d974b"
