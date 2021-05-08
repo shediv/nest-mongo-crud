@@ -40,11 +40,11 @@ $ yarn run test:cov
     - Type: POST
     
     User can create a task with the following details
-        ○ title
-        ○ description
-        ○ media (Image or Video anyone in a task)
-        ○ target_date
-        ○ status (Todo, In-progress, Done)
+        - title
+        - description
+        - media (Image or Video anyone in a task)
+        - target_date
+        - status (Todo, In-progress, Done)
 
 2. User can see the task details
     - https://nest-mongo-crud.herokuapp.com/tasks/{taskId}
@@ -64,11 +64,11 @@ $ yarn run test:cov
     - Type: PATCH
 
     User can update task with the following details
-        ○ title
-        ○ description
-        ○ media (Image or Video anyone in a task)
-        ○ target_date
-        ○ status (Todo, In-progress, Done)
+        - title
+        - description
+        - media (Image or Video anyone in a task)
+        - target_date
+        - status (Todo, In-progress, Done)
 
 5. Users can remove any task from the available tasks and allowed to remove multiple tasks at a time.
     - https://nest-mongo-crud.herokuapp.com/tasks/{taskId}
