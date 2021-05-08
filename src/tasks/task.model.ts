@@ -4,7 +4,7 @@ export const TaskSchema = new mongoose.Schema({
   title: { type: String, required: true },
   description: { type: String, required: true },
   media: { type: String, required: true },
-  target_date: { type: String, required: true },
+  target_date: { type: Date, required: true },
   status: { type: String, required: true },
 });
 

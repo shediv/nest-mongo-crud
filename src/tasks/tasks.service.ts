@@ -17,7 +17,7 @@ export class TasksService {
             title,
             description,
             media,
-            target_date,
+            target_date: new Date(target_date),
             status
           });
           const result = await newTask.save();
