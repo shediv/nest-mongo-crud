@@ -74,4 +74,16 @@ $ yarn run test:cov
     - https://nest-mongo-crud.herokuapp.com/tasks/{taskId}
     - Type: DELETE        
 
-        
+
+
+### DB structure
+DB has one collection called tasks which have below fields
+{ 
+    "_id"                   // MongoDB ObjectID
+    "title" :               // Title of task, also a index field for search
+    "description"           // description of task, also a index field for search    
+    "media"                 // media added with task
+    "target_date"           // target date for task
+    "status"                // status of current task
+    "isActive"              // isActive, can be used in case of soft delete
+}
