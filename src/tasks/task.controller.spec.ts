@@ -13,6 +13,7 @@ const mockTasksService = () => ({
     getAllTasks: jest.fn(), 
     getTasksWithFilters: jest.fn(),
     deleteTaskById: jest.fn(),
+    deleteMultipleTasksByIds: jest.fn(),
     updateTask: jest.fn(),   
 });
 
@@ -128,6 +129,15 @@ describe('TasksController', () => {
             await taskController.deleteTaskById(mTaskId);
             expect(taskService.deleteTaskById).toHaveBeenCalled();
             expect(taskService.deleteTaskById).toBeCalledTimes(1);
+        });
+    });
+
+    describe('Test Delete multiple tasks', () => {
+        it('should call deleteTaskById method of TasksController', async () => {
+            const mTaskId = '609670a9e7799fb0704d974b,609670a9e7799fb0704d974b';
+            await taskController.deleteTaskById(mTaskId);
+            expect(taskService.deleteMultipleTasksByIds).toHaveBeenCalled();
+            expect(taskService.deleteMultipleTasksByIds).toBeCalledTimes(1);
         });
     });
 
