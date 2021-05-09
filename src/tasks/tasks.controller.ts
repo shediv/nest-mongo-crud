@@ -90,7 +90,13 @@ export class TasksController {
     }
 
     @Delete('/:id')
-    deleteTaskById(@Param('id') id:string) {
-        return this.tasksService.deleteTaskById(id);
+    deleteTaskById(@Param('id') ids:any) {
+        // Get all ids if multiple passed.
+        const taskIds = ids.split(",");
+        if (taskIds.length > 1) {
+            return this.tasksService.deleteMultipleTasksByIds(taskIds);
+        } else {
+            return this.tasksService.deleteTaskById(taskIds[0]);
+        }
     }
 }

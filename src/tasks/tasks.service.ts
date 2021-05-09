@@ -71,6 +71,16 @@ export class TasksService {
         return result;
     }
 
+    async deleteMultipleTasksByIds(ids: any): Promise<any> {
+        // Find unique taskId and typecast to mongo objectId
+        let uniqueIds: any = [...new Set(ids)];
+        const result = await this.taskModel.remove({_id: { $in: [uniqueIds]}}).exec();
+        if (result.n === 0) {
+            throw new NotFoundException(ErrorConstants.NO_TASK_FOUND);
+        }
+        return result;
+    }
+
     async updateTask(updateTaskDto: any): Promise<Task> {
         // Check if Task by ID already exist
         const taskUpdateData = await this.findTask(updateTaskDto.id);
